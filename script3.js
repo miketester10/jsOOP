@@ -70,7 +70,7 @@ class Vehicle {
 
   calcPassengerPrice(distance) {
     let basePrice = this.calcCompanyPrice(distance) / this.capacity;
-    console.log(distance, this.incrementPercentual);
+    // console.log(distance, this.incrementPercentual);
     return basePrice * (this.incrementPercentual / 100) + basePrice;
   }
 
@@ -80,7 +80,10 @@ class Vehicle {
   }
 
   calcEstimatedTimeHour(distance) {
-    return distance / this.speedKmH;
+    let timeInMinutes = (distance / this.speedKmH) * 60
+    let minutes = timeInMinutes % 60
+    let hours = (timeInMinutes - minutes) / 60
+    return `${hours} ore e ${minutes.toFixed()} minuti`;
   }
 
   printInfo() {
@@ -114,7 +117,7 @@ class Vehicle {
     if (this.reservations === 0) {
       console.log(`Non ci sono prenotazioni da rimuovere`);
     } else {
-      if (this.reservations > quantity) {
+      if (this.reservations >= quantity) {
         this.reservations -= quantity;
         console.log(`Prenotazione rimossa`);
       } else {
@@ -194,7 +197,6 @@ class Bus extends Vehicle {
     model,
     capacity,
     speedKmH,
-    priceKm,
     consumptionLKm,
     fuelType,
     fuelPriceL,
@@ -206,7 +208,6 @@ class Bus extends Vehicle {
       model,
       capacity,
       speedKmH,
-      priceKm,
       consumptionLKm,
       fuelType,
       fuelPriceL,
@@ -249,6 +250,22 @@ arrayMezzi.forEach((mezzo) => {
   console.log(
     `Un viaggio di 100km in ${mezzo.type} costa ${mezzo.calcPassengerPrice(
       100
-    )}`
+    )}$ e dura ${mezzo.calcEstimatedTimeHour(100)}`
   );
 });
+
+obj1.addReservation(590);
+console.log(obj1.reservations);
+obj1.addReservation(20);
+console.log(obj1.reservations);
+obj1.addReservation(10);
+console.log(obj1.reservations);
+obj1.addReservation(10);
+console.log(obj1.reservations);
+
+obj1.removeReservation(10);
+console.log(obj1.reservations);
+obj1.removeReservation(590);
+console.log(obj1.reservations);
+obj1.removeReservation(10);
+console.log(obj1.reservations);
