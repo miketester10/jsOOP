@@ -64,11 +64,11 @@ class Libro {
   }
 
   restituisciLibro() {
-    if (this.#disponibile) {
-      console.warn(`Libro ${this.titolo} già presente in Biblioteca`);
+    if (this.disponibile) {
+      console.warn(`Libro ${this.titolo} già restituito.`);
       return;
     }
-    this.#disponibile = true;
+    this.#disponibile = true; // devo mettere # perchè non ho definito il set per poter modificarne il valore
   }
 }
 class Romanzo extends Libro {
@@ -143,7 +143,18 @@ const arrayLibri = [obj1, obj2, obj3];
 obj1.prestaLibro();
 arrayLibri.forEach((libro) => console.log(libro.visualizzaDettagli()));
 console.log(obj1.titolo);
+
 obj1.prestaLibro();
 arrayLibri.forEach((libro) => console.log(libro.visualizzaDettagli()));
+
+obj1.restituisciLibro();
+arrayLibri.forEach((libro) => console.log(libro.visualizzaDettagli()));
+
+obj1.restituisciLibro();
+arrayLibri.forEach((libro) => console.log(libro.visualizzaDettagli()));
+
 // obj1.titolo = 'Pippo'
 // console.log(obj1.titolo);
+
+// obj1.disponibile = true;
+// console.log(obj1.disponibile);
